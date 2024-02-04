@@ -8,6 +8,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -26,9 +27,10 @@ public class ProjectSecurityConfig {
 
         http.authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/myAccount","/myBalance","/myLoans","/myCards").authenticated()
-                        .requestMatchers("/notices","/contact").permitAll())
+                        .requestMatchers("/notices","/contact","/register").permitAll())
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());
+       http.csrf(csrf -> csrf.disable());
         return http.build();
 
         /**
@@ -79,6 +81,6 @@ public class ProjectSecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder(){
-        return  NoOpPasswordEncoder.getInstance();
+        return  new BCryptPasswordEncoder();
     }
 }
