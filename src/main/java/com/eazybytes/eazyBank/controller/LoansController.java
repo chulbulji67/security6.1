@@ -20,6 +20,7 @@ public class LoansController {
     @GetMapping("/myLoans")
     public List<Loans> getLoanDetails(@RequestParam int id) {
         List<Loans> loans = loanRepository.findByCustomerIdOrderByStartDtDesc(id);
+//        System.out.println(loans.get(0).getLoanNumber());
         if (loans != null ) {
             return loans;
         }else {

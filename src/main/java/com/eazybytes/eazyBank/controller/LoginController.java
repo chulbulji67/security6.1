@@ -48,6 +48,7 @@ public class LoginController {
 
     @RequestMapping("/user")
     public Customer getUserDetailsAfterLogin(Authentication authentication) {
+        System.out.println(authentication.getName());
         List<Customer> customers = customerRepository.findByEmail(authentication.getName());
         if (customers.size() > 0) {
             return customers.get(0);

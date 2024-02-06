@@ -1,10 +1,12 @@
 package com.eazybytes.eazyBank.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
 
+@Data
 @Entity
 @Table(name="loans")
 public class Loans {
